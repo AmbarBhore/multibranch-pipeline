@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0           https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.continuum</groupId>
+  <artifactId>multibranch-agent</artifactId>
+  <version>1.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>Multi Branch Agent</name>
+  <description>Spring Boot RMM Agent Version 1.1</description>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.7.17</version>
+    <relativePath/>
+    <!-- lookup parent from repository -->
+  </parent>
+  <properties>
+    <java.version>11</java.version>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+  </dependencies>
+  <distributionManagement>
+  <repository>
+    <id>nexus</id>
+    <name>Nexus Release Repository</name>
+    <url>http://192.168.0.107:8081/repository/maven-snapshots/</url>
+  </repository>
+  <snapshotRepository>
+    <id>nexus</id>
+    <name>Nexus Snapshot Repository</name>
+    <url>http://192.168.0.107:8081/repository/maven-snapshots/</url>
+  </snapshotRepository>
+</distributionManagement>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>

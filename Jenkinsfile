@@ -30,7 +30,7 @@ pipeline {
 	    steps {
 		script {
 		    def version = sh(
-			  script: "mvn help:evalute -Dexpression=project.version -q -DforceStdout",
+			  script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout",
 			  returnStdout: true
 		    ).trim()
 		    

@@ -66,5 +66,14 @@ pipeline {
 	      }
 	   }
 	}
+	
+	stage('Trigger Stage Deployment') {
+	   steps {
+	      build job: 'rmm-agent-stage',
+	            parameters: [
+			string(name: 'IMAGE_TAG', value: "${BUILD_NUMBER}")
+		    ]
+	   }
+	}	
     }
 }

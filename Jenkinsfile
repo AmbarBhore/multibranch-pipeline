@@ -26,7 +26,7 @@ pipeline {
 	    }
          }
 		
-	 stage('Build and Push Image to DockerHub") {
+	 stage('Build and Push Image to DockerHub') {
 	    steps {
 		script {
 		    def version = sh(

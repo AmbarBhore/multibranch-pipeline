@@ -1,11 +1,12 @@
-pipeline {
-     agent any
-
-     parameters {
+properties([
+    parameters ([
 	string(name: 'IMAGE_TAG', defaultValue: '', description: 'Docker Image Tag to deploy')
-     }
+     )]
+)]
 
-     stages {
+pipeline 
+    agent any
+    stages {
 	stage('Print Image Tag') {
 	    steps {
 		echo "Received params: IMAGE_TAG = ${params.IMAGE_TAG}"

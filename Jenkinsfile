@@ -74,6 +74,7 @@ pipeline {
 	            build job: 'rmm-agent-stage/stage', parameters: [
 			string(name: 'IMAGE_TAG', value: "${currentBuild}")
 		    ]
+	  	}
 	   }
 	}	
     }

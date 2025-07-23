@@ -69,7 +69,7 @@ pipeline {
 	
 	stage('Trigger Stage Deployment') {
 	   steps {
-	      build job: 'rmm-agent-stage',
+	      build job: 'rmm-agent-stage/stage',
 	            parameters: [
 			string(name: 'IMAGE_TAG', value: "${BUILD_NUMBER}")
 		    ]

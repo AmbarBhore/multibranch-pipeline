@@ -1,8 +1,8 @@
 properties([
-    parameters ([
+    parameters([
 	string(name: 'IMAGE_TAG', defaultValue: '', description: 'Docker Image Tag to deploy')
-     )]
-)]
+    ])
+])
 
 pipeline 
     agent any

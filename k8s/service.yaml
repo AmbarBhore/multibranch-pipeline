@@ -5,7 +5,7 @@ metadata:
   namespace: dev1
 spec:
   selector:
-    app: multi-brach
+    app: multi-branch
   ports:
     - protocol: TCP
       port: 80

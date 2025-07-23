@@ -1,10 +1,15 @@
 pipeline {
-    agent any
-    stages {
-       stage ("build") {
-          steps {
-            echo "Hello world from stage enviornment"
-          }
-        }
-    }
+     agent any
+
+     parameters {
+	string(name: 'IMAGE_TAG', defaultValue: '', description: 'Docker Image Tag to deploy')
+     }
+
+     stages {
+	stage('Print Image Tag') {
+	    steps {
+	   	echo "Deploying image with tag: ${params.IMAGE_TAG}"
+	    }
+	}	
+     }
 }

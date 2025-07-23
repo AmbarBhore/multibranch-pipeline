@@ -8,6 +8,7 @@ pipeline {
      stages {
 	stage('Print Image Tag') {
 	    steps {
+		echo "Received params: IMAGE_TAG = ${params.IMAGE_TAG}"
 	   	echo "Deploying image with tag1111: ${params.IMAGE_TAG}"
 	    }
 	}	

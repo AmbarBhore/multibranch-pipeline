@@ -27,4 +27,4 @@ spec:
           timeoutSeconds: 2
           failureThreshold: 3
       imagePullSecrets:
-      - name: dockerhub-cred
+      - name: dockerhub-credd

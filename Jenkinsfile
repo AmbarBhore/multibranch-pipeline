@@ -54,5 +54,17 @@ pipeline {
 	        }
 	    }
 	}
-     }
+	
+	stage('Deploy to the Dev k8s') {
+	   steps {
+	      script {
+		  echo "Deploying application to the kubernetes"
+		  sh 'kubectl apply -f k8s/deployment.yaml'
+		  sh 'kubectl apply -f k8s/service.yaml'
+		
+		  sh 'kubectl set image deployment/multi-branch multi-branch=${docker_registry}/${image_name}:{BUILD_NUMBER} -n dev1'
+	      }
+	   }
+	}
+    }
 }

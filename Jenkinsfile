@@ -4,7 +4,7 @@ properties([
     ])
 ])
 
-pipeline 
+pipeline { 
     agent any
     stages {
 	stage('Print Image Tag') {

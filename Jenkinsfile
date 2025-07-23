@@ -73,7 +73,9 @@ pipeline {
 		    def currentBuild = env.BUILD_NUMBER 
 	            build job: 'rmm-agent-stage/stage', parameters: [
 			string(name: 'IMAGE_TAG', value: "${currentBuild}")
-		    ]
+		    ],
+		    wait: true,
+		    propagate: false
 	  	}
 	   }
 	}	

@@ -2,7 +2,8 @@ pipeline {
      agent any
      environment {
 	IMAGE_TAG="${BUILD_NUMBER}"
-	docker_registry="ambarbhore1234" 
+	image_name='multi-branch-agent'
+	docker_registry='ambarbhore1234' 
      }
      
      stages {
@@ -24,5 +25,34 @@ pipeline {
 	        }
 	    }
          }
+		
+	 stage('Build and Push Image to DockerHub") {
+	    steps {
+		script {
+		    def version = sh(
+			  script: "mvn help:evalute -Dexpression=project.version -q -DforceStdout",
+			  returnStdout: true
+		    ).trim()
+		    
+		    echo "Docker Image version from pom.xml: ${version}"
+		    echo "Jenkins Build Number: ${BUILD_NUMBER}"
+		
+		    def jarName = sh(script: "ls target/*.jar | grep -v original | head -n 1", returnStdout: true).trim()
+		    sh "cp ${jarName} target/legacy-agent.jar"
+		    
+		    //Build docker images with maven version
+		    withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+		    	sh """
+			     echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
+			     
+			     docker build -t ${docker_registry}/${image_name}:${version} .
+			     docker tag ${docker_registry}/${image_name}:${version} ${docker_registry}/${image_name}:${IMAGE_TAG}
+			     docker push ${docker_registry}/${image_name}:${version}
+			     docker push ${docker_registry}/${image_name}:${IMAGE_TAG}
+			"""
+		    }
+	        }
+	    }
+	}
      }
 }

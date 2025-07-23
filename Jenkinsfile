@@ -69,14 +69,7 @@ pipeline {
 	
 	stage('Trigger Stage Deployment') {
 	   steps {
-		script {
-		    def currentBuild = env.BUILD_NUMBER 
-	            build job: 'rmm-agent-stage/stage', parameters: [
-			string(name: 'IMAGE_TAG', value: "${currentBuild}")
-		    ],
-		    wait: true,
-		    propagate: false
-	  	}
+		echo "Building Dev Job - Build Number: ${env.BUILD_NUMBER}"
 	   }
 	}	
     }

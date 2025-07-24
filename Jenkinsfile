@@ -18,7 +18,7 @@ pipeline {
 		
 		   // set image using IMAGE_TAG passed from the dev
 		   def image="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG}"
-		   echo "Setting image: ${image}
+		   echo "Setting image: ${image}"
 		  
 		   sh "kubectl set image deployment/multi-branch multi-branch=${image} -n stage" 		
 	   	}

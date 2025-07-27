@@ -5,14 +5,14 @@ pipeline {
         string(name: 'IMAGE_TAG', defaultValue: '', description: 'Docker Image tag to deploy')
     }
     
-    enviornment {
+    environment {
 	APP_LABEL="multi-branch-${params.TARGET_COLOR}"
 	DEPLOYMENT_NAME="multi-agent-${params.TARGET_COLOR}"
 	IMAGE="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG}"
     }
     
     stages {
-	stage("Deploy to ${params.TARGET_COLOR}") {
+	stage("Deploy to production") {
 	   steps {
 		script {
 		    echo "deploying to ${params.TARGET_COLOR} with image ${env.IMAGE}"

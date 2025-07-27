@@ -24,7 +24,7 @@ pipeline {
 		    sh "kubectl set image deployment/${env.DEPLOYMENT_NAME} multi-branch=${IMAGE} -n prod"
 			
 		    // Rollout check
-		    sh "kubectl rollout status deployment/${env.DEPLOYMENT_NAME} -n prod"
+		    sh "kubectl rollout status deployment/${IMAGE} -n prod"
 		}
 	   }
 	}

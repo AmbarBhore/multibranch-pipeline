@@ -1,27 +1,40 @@
 pipeline {
     agent any
     parameters {
-	string(name: 'IMAGE_TAG', defaultValue: '', description: 'Docker Image tag to deploy')
+	choice(name: 'TARGET_COLOR', choices: ['blue','green'], description: 'Choose which enviornment to deploy')
+        string(name: 'IMAGE_TAG', defaultValue: '', description: 'Docker Image tag to deploy')
     }
-
+    
+    enviornment {
+	APP_LABEL="multi-branch-${params.TARGET_COLOR}"
+	DEPLOYMENT_NAME="multi-agent-${params.TARGET_COLOR}"
+	IMAGE="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG}"
+    }
+    
     stages {
-       stage ("Deploy to kubernetes Production") {
-          steps {
-	     script {
-            	echo "Received Parameters: IMAGE_TAG = ${params.IMAGE_TAG}"
-		echo "Deploying Image with tag: ${params.IMAGE_TAG}"
-		
-		// Apply k8s and service YAMLs
-		sh 'kubectl apply -f k8s/deployment.yaml'
-		sh 'kubectl apply -f k8s/service.yaml'
+	stage("Deploy to ${params.TARGET_COLOR}") {
+	   steps {
+		script {
+		    echo "deploying to ${params.TARGET_COLOR} with image ${env.IMAGE}"
+			
+		    // Apply the corrosponding YAML
+		    sh "kubectl apply -f k8s/deployment-${params.TARGET_COLOR}.yaml - prod"
 
-		// set image using IMAGE_TAG passed from stage
-		def image="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG}"
-		echo "Setting up this image: ${image}"
-		
-		sh "kubectl set image deployment/multi-branch multi-branch=${image} -n prod"
-	     }
-          }
-        }
+		    // Set image
+		    sh "kubectl set image deployment/${env.DEPLOYMENT_NAME} multi-branch=${IMAGE} -n prod"
+			
+		    // Rollout check
+		    sh "kubectl rollout status deployment/${env.DEPLOYMENT_NAME} -n prod"
+		}
+	   }
+	}
+	stage("Switch Traffic") {
+	   steps {
+		script {
+		    echo "switching traffice to ${env.TARGET_COLOR}"
+		    sh "kubectl patch svc multi-branch-service -n prod -p '{\"spec\":{\"selector\":{\"app":\"${env.APP_LABEL}\"}}}'"
+     		}
+	   }
+	}
     }
 }

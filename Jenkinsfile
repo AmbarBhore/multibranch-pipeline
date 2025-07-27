@@ -32,7 +32,7 @@ pipeline {
 	   steps {
 		script {
 		    echo "switching traffice to ${env.TARGET_COLOR}"
-		    sh "kubectl patch svc multi-branch-service -n prod -p '{\"spec\":{\"selector\":{\"app":\"${env.APP_LABEL}\"}}}'"
+		    sh "kubectl patch svc multi-branch-service -n prod -p '{\"spec\":{\"selector\":{\"app\": \"${env.APP_LABEL}\"}}}'"
      		}
 	   }
 	}

@@ -18,7 +18,7 @@ pipeline {
 		    echo "deploying to ${params.TARGET_COLOR} with image ${env.IMAGE}"
 			
 		    // Apply the corrosponding YAML
-		    sh "kubectl apply -f k8s/deployment-${params.TARGET_COLOR}.yaml - prod"
+		    sh "kubectl apply -f k8s/deployment-${params.TARGET_COLOR}.yaml -n prod"
 
 		    // Set image
 		    sh "kubectl set image deployment/${env.DEPLOYMENT_NAME} multi-branch=${IMAGE} -n prod"

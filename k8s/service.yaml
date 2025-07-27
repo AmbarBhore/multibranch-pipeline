@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: multi-branch
+  name: multi-branch-blue
   namespace: prod
 spec:
   selector:
-    app: multi-branch
+    app: multi-branch-blue
   ports:
     - protocol: TCP
       port: 80

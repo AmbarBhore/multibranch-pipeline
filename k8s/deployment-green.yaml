@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: multi-branch
+  name: multi-branch-green
   namespace: prod
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: multi-branch
+      app: multi-branch-green
   template:
     metadata:
       labels:
-        app: multi-branch
+        app: multi-branch-green
     spec:
       containers:
-      - name: multi-branch
+      - name: multi-branch-green
         image: ambarbhore1234/multi-branch-agent:placeholder
         ports:
         - containerPort: 9090
         livenessProbe:
-          httpGet: 
+          httpGet:
             path: /healthz
             port: 9090
           initialDelaySeconds: 10

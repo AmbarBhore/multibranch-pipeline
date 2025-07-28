@@ -9,6 +9,7 @@ pipeline {
 	APP_LABEL="multi-branch-${params.TARGET_COLOR}"
 	DEPLOYMENT_NAME="multi-agent-${params.TARGET_COLOR}"
 	IMAGE="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG}"
+	CONTAINER_NAME = "multi-agent-${params.TARGET_COLOR}"
     }
     
     stages {
@@ -21,10 +22,10 @@ pipeline {
 		    sh "kubectl apply -f k8s/deployment-${params.TARGET_COLOR}.yaml -n prod"
 
 		    // Set image
-		    sh "kubectl set image deployment/${env.DEPLOYMENT_NAME} multi-branch=${IMAGE} -n prod"
+		    sh "kubectl set image deployment/${env.DEPLOYMENT_NAME} ${env.CONTAINER_NAME}=${IMAGE} -n prod"
 			
 		    // Rollout check
-		    sh "kubectl rollout status deployment/${IMAGE} -n prod"
+		    sh "kubectl rollout status deployment/${env.DEPLOYMENT_NAME} -n prod"
 		}
 	   }
 	}

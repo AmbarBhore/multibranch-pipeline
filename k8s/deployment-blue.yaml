@@ -14,7 +14,7 @@ spec:
         app: multi-branch-blue
     spec:
       containers:
-      - name: multi-branch-blue
+      - name: multi-agent-blue
         image: ambarbhore1234/multi-branch-agent:placeholder
         ports:
         - containerPort: 9090

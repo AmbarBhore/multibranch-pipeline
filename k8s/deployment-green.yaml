@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: multi-branch-green
+  name: multi-agent-green
   namespace: prod
 spec:
   replicas: 2
@@ -14,7 +14,7 @@ spec:
         app: multi-branch-green
     spec:
       containers:
-      - name: multi-branch-green
+      - name: multi-agent-green
         image: ambarbhore1234/multi-branch-agent:placeholder
         ports:
         - containerPort: 9090

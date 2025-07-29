@@ -6,7 +6,7 @@
   <version>1.1-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Multi Branch Agent</name>
-  <description>Spring Boot RMM Agent Version 1.1</description>
+  <description>Spring Boot RMM Agent Version 1.2</description>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>

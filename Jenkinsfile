@@ -17,6 +17,9 @@ pipeline {
 	   steps {
 		script {
 		    echo "deploying to ${params.TARGET_COLOR} with image ${env.IMAGE}"
+		
+		    // Apply service (once or every time)
+		    sh "kubectl apply -f k8s/service.yaml -n prod"
 			
 		    // Apply the corrosponding YAML
 		    sh "kubectl apply -f k8s/deployment-${params.TARGET_COLOR}.yaml -n prod"

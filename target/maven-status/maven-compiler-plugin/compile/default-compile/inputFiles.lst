@@ -4,6 +4,4 @@
 /root/multibranch-pipeline/src/main/java/com/example/rmmagent/controller/HealthController.java
 /root/multibranch-pipeline/src/main/java/com/example/rmmagent/controller/StatusController.java
 /root/multibranch-pipeline/src/main/java/com/example/rmmagent/controller/TestHangController.java
-/root/multibranch-pipeline/src/main/java/com/example/rmmagent/controller/UptimeController.java
 /root/multibranch-pipeline/src/main/java/com/example/rmmagent/RmmAgentApplication.java
-/root/multibranch-pipeline/src/main/java/com/example/rmmagent/controller/DiskUsageController.java

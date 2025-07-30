@@ -32,6 +32,14 @@ pipeline {
 		}
 	   }
 	}
+	stage("Smoke Test on deployment") {
+	   steps {
+		script {
+		    echo "Runing smoke test ${DEPLOYMENT_NAME}"
+		    sh "./smoke-test.sh"
+		}
+	  }
+	}
 	stage("Switch Traffic") {
 	   steps {
 		script {

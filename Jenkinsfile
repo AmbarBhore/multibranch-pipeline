@@ -36,7 +36,7 @@ pipeline {
 		    // Replace image tag in YAML
 		    sh """
 		      echo "Updating image tag in deployment-${env.TARGET_COLOR}.yaml"
-		      sed -i 's|image: .*$|image: ${env.IMAGE}|' k8s/deployment-${env.TARGET_COLOR}.yaml
+		      sed -i 's|image: .*|image: ${env.IMAGE}|' k8s/deployment-${env.TARGET_COLOR}.yaml
 		    """
 		
 		    // Apply service (once or every time)

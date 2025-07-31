@@ -8,7 +8,7 @@ pipeline {
     environment {
 	APP_LABEL="multi-branch-${params.TARGET_COLOR}"
 	DEPLOYMENT_NAME="multi-agent-${params.TARGET_COLOR}"
-	IMAGE="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG}"
+	IMAGE="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG ?: 'latest'}"
 	CONTAINER_NAME = "multi-agent-${params.TARGET_COLOR}"
     }
     

@@ -12,7 +12,7 @@ pipeline {
 		echo "Deploying Image with tag: ${params.IMAGE_TAG}"
 		
 		// Apply k8s and service YAMLs
-		sh 'kubectl apply -f k8s/deployment.yaml'
+		sh 'kubectl apply -f k8s/deployment-blue.yaml'
 		sh 'kubectl apply -f k8s/service.yaml'
 
 		// set image using IMAGE_TAG passed from stage

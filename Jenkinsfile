@@ -19,7 +19,7 @@ pipeline {
 		def image="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG}"
 		echo "Setting up this image: ${image}"
 		
-		sh "kubectl set image deployment/multi-agent-blue multi-agent=${image} -n prod"
+		sh "kubectl set image deployment/multi-agent-blue multi-agent-blue=${image} -n prod"
 	     }
           }
         }

@@ -14,7 +14,7 @@ pipeline {
 		// Apply k8s and service YAMLs
 		sh 'kubectl apply -f k8s/deployment-blue.yaml'
 		sh 'kubectl apply -f k8s/service.yaml'
-		sh 'kubectl apply -f k8s/pdb.yaml'
+		// sh 'kubectl apply -f k8s/pdb.yaml'
 
 		// set image using IMAGE_TAG passed from stage
 		def image="ambarbhore1234/multi-branch-agent:${params.IMAGE_TAG}"

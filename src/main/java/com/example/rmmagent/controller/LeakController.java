@@ -10,13 +10,20 @@ import java.util.UUID;
 @RestController
 public class LeakController {
 
-    private List<String> memoryLeakList = new ArrayList<>();
+    // Hold memory here across requests
+    private List<byte[]> memoryLeakList = new ArrayList<>();
 
     @GetMapping("/leak")
     public String createLeak() {
-        for (int i = 0; i < 1000000; i++) {
-            memoryLeakList.add(UUID.randomUUID().toString());
+        try {
+            // Allocate 50 MB per iteration, 100 times = ~5 GB if unbounded
+            for (int i = 0; i < 100; i++) {
+                byte[] block = new byte[50 * 1024 * 1024]; // 50 MB
+                memoryLeakList.add(block);
+            }
+            return "Leaking memory rapidly...";
+        } catch (OutOfMemoryError e) {
+            return "OOM Error triggered!";
         }
-        return "Memory leaking...";
     }
 }

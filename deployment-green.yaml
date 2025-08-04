@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-agent-green
+  namespace: prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: multi-branch-green
+  template:
+    metadata:
+      labels:
+        app: multi-branch-green
+    spec:
+      containers:
+      - name: multi-agent-green
+        image: ambarbhore1234/multi-branch-agent:placeholder
+        ports:
+        - containerPort: 9090
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 9090
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 3
+      imagePullSecrets:
+      - name: dockerhub-cred-prod

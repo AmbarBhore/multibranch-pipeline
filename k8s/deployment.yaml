@@ -22,9 +22,9 @@ spec:
           httpGet: 
             path: /healthz
             port: 9090
-          initialDelaySeconds: 10
+          initialDelaySeconds: 20
           periodSeconds: 5
           timeoutSeconds: 2
-          failureThreshold: 3
+          failureThreshold: 5
       imagePullSecrets:
       - name: dockerhub-credd

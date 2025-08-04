@@ -20,11 +20,19 @@ spec:
         - containerPort: 9090
         livenessProbe:
           httpGet: 
-            path: /healthz
+            path: /health
             port: 9090
-          initialDelaySeconds: 10
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 9090
+          initialDelaySeconds: 30
           periodSeconds: 5
-          timeoutSeconds: 2
+          timeoutSeconds: 3
           failureThreshold: 3
       imagePullSecrets:
       - name: dockerhub-cred-prod

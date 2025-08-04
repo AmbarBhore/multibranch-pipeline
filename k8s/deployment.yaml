@@ -20,7 +20,7 @@ spec:
         - containerPort: 9090
         livenessProbe:
           httpGet: 
-            path: /healthz
+            path: /health
             port: 9090
           initialDelaySeconds: 20
           periodSeconds: 5

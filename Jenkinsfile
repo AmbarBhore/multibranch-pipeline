@@ -9,7 +9,7 @@ pipeline {
      stages {
 	stage('Build the JAR') {
 	   steps {
-	      sh 'mvn clean package -DskipTests'
+	      sh 'mvn package -DskipTests'
 	   }
 	}
 
